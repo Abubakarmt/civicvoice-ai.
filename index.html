@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CivicVoice AI - Northern Nigeria</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f7f4;color:#183329}
+header{background:#07583e;color:white;padding:35px 20px;text-align:center}
+header h1{font-size:30px;margin:10px}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:white;padding:12px;position:sticky;top:0}
+button,select{padding:12px;border:0;border-radius:8px;background:#e5f1e9;color:#07583e;font-weight:bold;cursor:pointer}
+button:hover{background:#07583e;color:white}
+main{max-width:850px;margin:20px auto;padding:12px}
+section{display:none;background:white;padding:22px;border-radius:14px;margin-bottom:18px;box-shadow:0 3px 12px #0001}
+section.active{display:block}
+h2{color:#07583e}
+textarea{width:100%;min-height:110px;padding:12px;border:1px solid #bbb;border-radius:8px;font:inherit}
+.result{background:#edf6ef;padding:15px;border-radius:9px;margin-top:15px}
+.card{background:#f2f8f3;padding:15px;border-radius:10px;margin:10px 0}
+a{color:#08734e}
+footer{text-align:center;padding:25px;color:#52665b}
+.notice{background:#fff5df;padding:13px;border-radius:9px;margin-top:15px}
+</style>
+</head>
+<body>
+<header>
+<h1>◈ CivicVoice AI</h1>
+<p>NORTHERN NIGERIA</p>
+<h2 style="color:white">Understand. Verify. Participate.</h2>
+<p>Reliable civic information for every Nigerian.</p>
+</header>
+
+<nav>
+<button onclick="show('home')">Home</button>
+<button onclick="show('ask')">Ask AI</button>
+<button onclick="show('verify')">Verify Claim</button>
+<button onclick="show('learn')">Civic Education</button>
+<button onclick="show('sources')">Sources</button>
+<select id="lang" onchange="language()">
+<option value="en">English</option>
+<option value="ha">Hausa</option>
+</select>
+</nav>
+
+<main>
+<section id="home" class="active">
+<h2>Welcome to CivicVoice AI</h2>
+<p>Understand your civic rights, learn how elections work and examine public claims using evidence.</p>
+<div class="card"><h3>🔎 Verify information</h3><p>Examine public claims and understand the evidence.</p></div>
+<div class="card"><h3>🌍 English and Hausa</h3><p>Access civic information in your preferred language.</p></div>
+<div class="card"><h3>🛡️ Nonpartisan information</h3><p>Independent civic education without political persuasion.</p></div>
+<button onclick="show('verify')">Verify a Claim</button>
+<button onclick="show('ask')">Ask CivicVoice AI</button>
+<div class="notice"><b>Prototype notice:</b> This is an independent demonstration, not an official INEC application. Sample answers are not live AI research or legal advice.</div>
+</section>
+
+<section id="ask">
+<h2>Ask CivicVoice AI</h2>
+<p>Ask a question about Nigerian civic and electoral information.</p>
+<textarea id="question" placeholder="Example: What is the role of INEC?"></textarea><br><br>
+<button onclick="answer()">Get Answer</button>
+<div id="answer" class="result">Your answer will appear here.</div>
+</section>
+
+<section id="verify">
+<h2>Claim Verification Engine</h2>
+<p>Enter a public claim to see a demonstration assessment.</p>
+<textarea id="claim" placeholder="Every Nigerian who turns 18 is automatically registered to vote."></textarea><br><br>
+<button onclick="verify()">Verify Claim</button>
+<div id="verdict" class="result">Your assessment will appear here.</div>
+<p>Assessment date: <span id="date"></span></p>
+</section>
+
+<section id="learn">
+<h2>Civic Education</h2>
+<div class="card"><h3>Voter Registration</h3><p>Eligible citizens must complete voter registration with INEC. Turning 18 does not automatically register a person.</p></div>
+<div class="card"><h3>INEC</h3><p>INEC is Nigeria's independent electoral body, with responsibilities established by the Constitution and electoral laws.</p></div>
+<div class="card"><h3>BVAS</h3><p>BVAS means Bimodal Voter Accreditation System. It is used in voter accreditation and related electoral processes.</p></div>
+<div class="card"><h3>Peaceful Participation</h3><p>Respect other citizens, reject electoral violence and consult reliable information.</p></div>
+</section>
+
+<section id="sources">
+<h2>Sources and Transparency</h2>
+<p>Consult official sources for current electoral information:</p>
+<ul>
+<li><a href="https://www.inecnigeria.org/" target="_blank">INEC Official Website</a></li>
+<li><a href="https://cvr.inecnigeria.org/" target="_blank">INEC Voter Registration Portal</a></li>
+<li><a href="https://nass.gov.ng/" target="_blank">National Assembly</a></li>
+<li><a href="https://www.nigerialii.org/" target="_blank">Nigeria Legal Information Institute</a></li>
+</ul>
+<h3>Privacy and Safety</h3>
+<p>Never enter your NIN, BVN, PVC number or passwords. CivicVoice AI does not support political parties or candidates.</p>
+<p><b>Transparency:</b> This version uses sample responses. Live web research and a connected AI knowledge system are not yet configured.</p>
+</section>
+</main>
+
+<footer>CivicVoice AI — Understand. Verify. Participate.<br>Independent civic technology prototype. Not affiliated with INEC.</footer>
+
+<script>
+document.getElementById("date").textContent=new Date().toLocaleDateString();
+
+function show(id){
+document.querySelectorAll("main section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+window.scrollTo(0,0);
+}
+
+function answer(){
+let q=document.getElementById("question").value.toLowerCase();
+let a="I cannot verify this question using the limited demonstration database. Please consult the official sources on our Sources page.";
+if(q.includes("inec")&&(q.includes("role")||q.includes("function"))){
+a="INEC is Nigeria's independent electoral body. Its constitutional responsibilities are set out in Section 153(1)(f), Section 153(2) and the Third Schedule, Part I, paragraph 15 of the 1999 Constitution, as amended.";
+}else if(q.includes("capital")){
+a="Abuja is Nigeria's capital. Section 297 and Section 299 of the 1999 Constitution provide the constitutional framework for the Federal Capital Territory.";
+}else if(q.includes("register")||q.includes("18")){
+a="Turning 18 does not automatically register a citizen to vote. Eligible citizens must complete voter registration with INEC. Visit https://cvr.inecnigeria.org/";
+}else if(q.includes("bvas")){
+a="BVAS means Bimodal Voter Accreditation System. It is used by INEC for voter accreditation. Consult current INEC guidelines for operational procedures.";
+}
+document.getElementById("answer").textContent=a;
+}
+
+function verify(){
+let q=document.getElementById("claim").value.toLowerCase();
+let v="<b>UNVERIFIED — Further research required.</b><p>This demonstration does not have live research access. Check official sources before relying on this assessment.</p>";
+if((q.includes("18")||q.includes("eighteen"))&&(q.includes("automatically")||q.includes("without registering"))){
+v="<b>CONTRADICTED — Demonstration assessment.</b><p>Turning 18 does not automatically register a Nigerian citizen to vote. Eligible citizens must meet the legal qualifications and complete registration with INEC.</p><p>Relevant references to consult: Electoral Act 2026, Sections 10 and 12, and INEC voter registration guidance.</p><a href='https://cvr.inecnigeria.org/' target='_blank'>INEC Registration Portal</a><p><i>This is a prewritten example, not a live source check.</i></p>";
+}else if(q.includes("abuja")&&q.includes("capital")){
+v="<b>SUPPORTED — Demonstration assessment.</b><p>Abuja is Nigeria's capital. Consult the Nigerian Constitution for the relevant Federal Capital Territory provisions.</p>";
+}
+document.getElementById("verdict").innerHTML=v;
+}
+
+function language(){
+let ha=document.getElementById("lang").value==="ha";
+document.querySelector("header h2").textContent=ha?"Fahimta. Tabbatarwa. Shiga cikin harkokin jama'a.":"Understand. Verify. Participate.";
+document.querySelector("header p:last-child").textContent=ha?"Bayani mai taimako kan harkokin jama'a ga 'yan Najeriya.":"Reliable civic information for every Nigerian.";
+}
+</script>
+</body>
+</html>
